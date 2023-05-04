@@ -27,12 +27,13 @@ const routes: any = createBrowserRouter([
         path: "/search",
         element: <SearchList />
       },
-      {
-        path: "*",
-        element: <PageNotFound />
-      }
+
     ]
+  }, {
+    path: "*",
+    element: <PageNotFound />
   }
+
 ]);
 
 export default routes;
