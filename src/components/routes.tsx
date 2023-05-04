@@ -6,18 +6,22 @@ import HomePage from "../views/HomePage";
 import BreweriesPage from "../views/BreweriesPage";
 import SearchList from "../views/SearchList";
 import PageNotFound from "../views/PageNotFound";
+import BreweriesPic from "../views/BreweriesPic";
 
 const routes: any = createBrowserRouter([  
   {
     path: "/",
+    element: <HomePage />,
     children: [
       {
-        path: "/",
-        element: <HomePage />
-      },
-      {
         path: "/breweries",
-        element: <BreweriesPage />
+        element: <BreweriesPage />,
+        children: [
+          {
+            path: "/breweries/id",
+            element: <BreweriesPic />
+          }
+        ]
       },
       {
         path: "/search",

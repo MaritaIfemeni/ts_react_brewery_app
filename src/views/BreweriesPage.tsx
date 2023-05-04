@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 const BreweriesPage = () => {
   return (
-    <div>BreweriesPage</div>
-  )
-}
+    <div>
+      <div>BreweriesPage</div>
+      <Outlet />
+    </div>
+  );
+};
 
-export default BreweriesPage
+export default BreweriesPage;

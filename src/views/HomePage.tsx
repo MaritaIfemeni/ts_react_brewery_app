@@ -1,8 +1,6 @@
 import React from "react";
-import { Link, Route } from "react-router-dom";
-import BreweriesPage from "./BreweriesPage";
-import SearchList from "./SearchList";
-import PageNotFound from "./PageNotFound";
+import { Link, Outlet } from "react-router-dom";
+
 
 const HomePage = () => {
   return (
@@ -11,7 +9,9 @@ const HomePage = () => {
         <Link to="/">Home</Link>
         <Link to="/breweries">Breweries</Link>
         <Link to="/search">Search</Link>
+        <Link to="/breweries/id">BreweriesPic</Link>
       </nav>
+      <Outlet />
     </div>
   );
 };
