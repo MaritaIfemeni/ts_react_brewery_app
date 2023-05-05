@@ -1,39 +1,35 @@
-// use createBrowserRouter to create a router
-
 import React from "react";
-import { createBrowserRouter, RouterProvider, Route, RouteProps, RouteObject} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
+
 import HomePage from "../views/HomePage";
 import BreweriesPage from "../views/BreweriesPage";
 import SearchList from "../views/SearchList";
 import PageNotFound from "../views/PageNotFound";
-import BreweriesPic from "../views/BreweriesPic";
+import ContactForm from "../views/ContactForm";
 
-const routes: any = createBrowserRouter([  
+const routes: any = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
     children: [
       {
-        path: "/breweries",
+        path: "/",
         element: <BreweriesPage />,
-        children: [
-          {
-            path: "/breweries/id",
-            element: <BreweriesPic />
-          }
-        ]
+      },
+      {
+        path: "/id",
+        element: <ContactForm />,
       },
       {
         path: "/search",
-        element: <SearchList />
+        element: <SearchList />,
       },
-
-    ]
-  }, {
-    path: "*",
-    element: <PageNotFound />
-  }
-
+      {
+        path: "*",
+        element: <PageNotFound />,
+      },
+    ],
+  },
 ]);
 
 export default routes;
