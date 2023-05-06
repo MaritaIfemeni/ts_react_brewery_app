@@ -1,29 +1,34 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-import { BreweryDetails } from "../types/Types";
-import breweryListing from "../components/breweryListing";
+import { Brewery } from "../types/types";
 
-interface Props {
-  data: BreweryDetails[];
-}
+const BreweryList = () => {
+    const [breweries, setBreweries] = useState<Brewery[]>([]);
 
-const BreweryList = ({ data }: Props) => {
-  return (
-    <div>
-      <h1>Brewery List</h1>
-      <ul>
-        {data.map((brewery: BreweryDetails) => (
+    useEffect(() => {
+      axios.get<Brewery[]>("https://api.openbrewerydb.org/breweries").then((response) => {
+        setBreweries(response.data);
+      });
+    }, []);
+  
+    return (
+      <div>
+        <h1>Breweries</h1>
+        <ul>
+        {breweries.map((brewery) => (
           <li key={brewery.id}>
-            <a href={`/breweries/${brewery.id}`}>{brewery.name}</a>
+             <Link to={`/breweries/${brewery.id}`}>
+            <h2>{brewery.name}</h2>
+          </Link>
+            <p>{brewery.brewery_type}</p>
+            <p>{brewery.city}, {brewery.state}, {brewery.country}</p>
           </li>
         ))}
-      </ul>
-    </div>
-  );
-};
-const BreweryDetailsList = breweryListing(
-  BreweryList,
-  "https://api.openbrewerydb.org/breweries?per_page=3"
-);
+        </ul>
+      </div>
+    );
+  }
 
-export default BreweryDetailsList;
+export default BreweryList;

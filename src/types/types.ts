@@ -1,5 +1,6 @@
-export interface BreweryDetails {
-    id: number;
+
+export interface Brewery {
+    id: string;
     name: string;
     brewery_type: string;
     address_1: string;
@@ -16,4 +17,3 @@ export interface BreweryDetails {
     state: string;
     street: string;
 }
-

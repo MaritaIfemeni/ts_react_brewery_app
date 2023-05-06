@@ -1,11 +1,10 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import HomePage from "../views/HomePage";
-import BreweriesPage from "../views/BreweriesPage";
-import SearchList from "../views/SearchList";
-import PageNotFound from "../views/PageNotFound";
-import ContactForm from "../views/ContactForm";
+import HomePage from "./HomePage";
+import BreweryList from "./BreweryList";
+import PageNotFound from "./PageNotFound";
+import BreweryDetails from "./BreweryDetails";
 
 const routes: any = createBrowserRouter([
   {
@@ -13,16 +12,12 @@ const routes: any = createBrowserRouter([
     element: <HomePage />,
     children: [
       {
-        path: "/",
-        element: <BreweriesPage />,
+        path: "/breweries",
+        element: <BreweryList />,
       },
       {
-        path: "/id",
-        element: <ContactForm />,
-      },
-      {
-        path: "/search",
-        element: <SearchList />,
+        path: "/breweries/:id",
+        element: <BreweryDetails />,
       },
       {
         path: "*",
