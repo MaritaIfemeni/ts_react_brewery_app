@@ -8,6 +8,7 @@ import {
   TableCell,
   TableBody,
   TablePagination,
+  Button,
 } from "@mui/material";
 
 import { Brewery } from "../types/types";
@@ -16,26 +17,36 @@ import { Brewery } from "../types/types";
 const BreweryList = () => {
   const [breweries, setBreweries] = useState<Brewery[]>([]);
   const [page, setPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [error, setError] = useState("");
   useEffect(() => {
     axios
       .get<Brewery[]>("https://api.openbrewerydb.org/breweries")
       .then((response) => {
         setBreweries(response.data);
+      })
+      .catch((error) => {
+        setError(error.message);
       });
   }, []);
-  //  const handleChangePage = (
-  //    event: MouseEvent<HTMLButtonElement> | null,
-  //    newPage: number
-  //  ) => {
-  //    setPage(newPage);
-  //  };
-  //  const handleChangeRowsPerPage = (
-  //    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  //  ) => {
-  //    setRowsPerPage(parseInt(event.target.value, 10));
-  //    setPage(0);
-  //  };
+  if (!breweries) {
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return <p>{error}</p>;
+  }
+    const handleChangePage = (
+      event: MouseEvent<HTMLButtonElement> | null,
+      newPage: number
+    ) => {
+      setPage(newPage);
+    };
+    const handleChangeRowsPerPage = (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
+    };
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, breweries.length - page * rowsPerPage);
 
@@ -63,7 +74,9 @@ const BreweryList = () => {
               <TableCell>{brewery.city}</TableCell>
               <TableCell>
                 <Link to={`/breweries/${brewery.id}`}>
-                  <button>Details</button>
+                 <Button variant="contained" color="primary">
+                    Details
+                  </Button>
                 </Link>
               </TableCell>
             </TableRow>

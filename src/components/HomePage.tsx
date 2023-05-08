@@ -1,6 +1,16 @@
 import React, { useEffect, useState, ChangeEvent } from "react";
 import axios from "axios";
 import { Link, Outlet } from "react-router-dom";
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  TablePagination,
+  TextField,
+  Button,
+} from "@mui/material";
 
 import { Brewery } from "../types/types";
 
@@ -22,6 +32,7 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
   const [showList, setShowList] = useState(false);
+  const [error, setError] = useState("");
   useEffect(() => {
     if (debouncedSearchTerm) {
       axios
@@ -30,17 +41,30 @@ const HomePage = () => {
         )
         .then((response) => {
           setBreweries(response.data);
+        })
+        .catch((error) => {
+          setError(error.message);
         });
     } else {
       setBreweries([]);
     }
   }, [debouncedSearchTerm]);
+  if (error) {
+    return <p>{error}</p>;
+  }
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
     setShowList(true);
   };
   const handleLinkClick = () => {
     setSearchTerm("");
+    setShowList(false);
+    const input = document.querySelector(
+      'input[type="text"]'
+    ) as HTMLInputElement;
+    if (input) {
+      input.value = "";
+    }
   };
 
   return (
@@ -53,35 +77,48 @@ const HomePage = () => {
         </nav>
       </header>
       <main>
-        <div>
-          <input
-            type="text"
-            placeholder="Search breweries by city"
-            onChange={handleSearch}
-          />
-          {showList && (
-            <div>
+        <h2>Find a brewery near you!</h2>
+        <TextField
+          id="outlined-basic"
+          label="Serch Breweries By City"
+          variant="outlined"
+          onChange={handleSearch}
+        />
+        {showList && (
+          <Table
+            sx={{ minWidth: 650 }}
+            aria-label="simple table"
+            className="brewery-table"
+          >
+            <TableBody>
               {breweries.map((brewery) => (
-                <div key={brewery.id}>
-                  <Link
-                    to={`/breweries/${brewery.id}`}
-                    onClick={handleLinkClick}
-                  >
-                    <h2>{brewery.name}</h2>
-                  </Link>
-                  <p>{brewery.brewery_type}</p>
-                  <p>
-                    {brewery.city}, {brewery.state}, {brewery.country}
-                  </p>
-                </div>
+                <TableRow
+                  key={brewery.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {brewery.name}
+                  </TableCell>
+                  <TableCell>{brewery.city}</TableCell>
+                  <TableCell>
+                    <Link
+                      to={`/breweries/${brewery.id}`}
+                      onClick={handleLinkClick}
+                    >
+                      <Button variant="contained" color="primary">
+                        Details
+                      </Button>
+                    </Link>
+                  </TableCell>
+                </TableRow>
               ))}
-            </div>
-          )}
-        </div>
+            </TableBody>
+          </Table>
+        )}
         <Outlet />
       </main>
       <footer>
-        <h3> Footer here</h3>
+        <h6> Find Breweries - Made By marita Ifemeni</h6>
       </footer>
     </div>
   );

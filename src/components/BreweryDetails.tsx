@@ -2,22 +2,29 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { Box } from "@mui/system";
-import { IconButton } from "@mui/material";
+import { Button } from "@mui/material";
 
 import { Brewery } from "../types/types";
 
 const BreweryDetails = () => {
   const { id } = useParams<{ id: string }>();
   const [brewery, setBrewery] = useState<Brewery>();
+  const [error, setError] = useState("");
   useEffect(() => {
     axios
-      .get<Brewery>(`https://api.openbrewerydb.org/breweries/${id}`)
+      .get(`https://api.openbrewerydb.org/breweries/${id}`)
       .then((response) => {
         setBrewery(response.data);
+      })
+      .catch((error) => {
+        setError(error.message);
       });
   }, [id]);
   if (!brewery) {
-    return <div>Loading...</div>;
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return <p>{error}</p>;
   }
 
   return (
@@ -36,16 +43,24 @@ const BreweryDetails = () => {
               p: 4,
             }}
           >
-            <h2>{brewery.name}</h2>
-            <p>{brewery.brewery_type}</p>
+            <h3>{brewery.name}</h3>
+            <p>Address:</p>
             <p>
-              {brewery.city}, {brewery.state}, {brewery.country}{" "}
-              {brewery.website_url}
+              {brewery.city}, {brewery.state}, {brewery.country}
+            </p>
+            <p>
+              <a
+                href={brewery.website_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Visit website
+              </a>
             </p>
             <Link to="/">
-              <IconButton aria-label="home">
-                <i className="fas fa-home">home</i>
-              </IconButton>
+              <Button variant="contained" color="secondary">
+                Go back Home
+              </Button>
             </Link>
           </Box>
         </Box>
