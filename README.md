@@ -1,25 +1,73 @@
-# Breweries App
+# React Assignment with TypeScript - Breweries App
 
-Fetch, display, and search for brewery companies from the given API endpoint, using React and TypeScript
+Assigment to create fetch, display, and search for brewery companies from the given API endpoint, using React and TypeScript
 
-## Requirements
+THIS PROJECT IS NOT COMPLETE, still TODO:
+- Not all the addigment requirements are met
+- No prober folder structure applied
+- No proper styling applied
+- No otimization done 
+- No code repetation handled
+- No tests written
+- Deploymet not done yet
 
-1. Check the documentation at [https://www.openbrewerydb.org/documentation](https://www.openbrewerydb.org/documentation) Fetch and display information of all the companies.
+## Table of contents
 
-2. Have proper display and routing that user can switch to/back from specific company's detailed page
+- [Issues](#issues)
+- [Technologies](#technologies)
+- [Deployment](#deployment)
+- [Getting started](#getting-started)
+- [Project structure](#project-structure)
 
-3. Create search component to enable user to input text and search for companies by name.
+## Issues
 
-4. Use MaterialUI to make your design more appealing and responsive
+- Search not functioning properly
+- Pagination with MUI table not working (props issue?)
 
-5. Implement performance optimization where applicable
+## Technologies
 
-6. Deploy your application and rewrite README file
+- TypeScript
+- React
+- SCSS
+- Material UI
 
-## Optional
+## Deployment
 
-7. Use the queries listed in the documentation to sort and limit the returned data and build pagination feature.
+TODO: Checkout the project from **[here]()**.
 
-8. Create a contact form so that user can send question along with their contact information. 
+## Getting started
 
-9. Use Google-login option to pre-fill the contact form for user.
+1. To clone repository use: git clone 
+2. To install the project run: npm install
+3. Refer to package.json for scripts 
+4. To run application in development mode run: npm start 
+
+## Project structure
+```
+.
+├── README.md
+├── node_modules
+├── package-lock.json
+├── package.json
+├── public
+├── src
+├── App.css
+├── App.css.map
+├── App.tsx
+│    ├── components
+│    │   ├── BreweryDetails.tsx
+│    │   ├── BreweryList.tsx
+│    │   ├── HomePage.tsx
+│    │   ├── PageNotFound.tsx
+│    │   └── routes.tsx
+│    ├── index.css
+│    ├── index.tsx
+│    ├── react-app-env.d.ts
+│    ├── reportWebVitals.ts
+│    ├── setupTests.ts
+│    ├── styles
+│    │   └── App.scss
+│    └── types
+│        └── types.ts
+│
+└── tsconfig.json
