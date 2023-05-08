@@ -9,7 +9,6 @@ THIS PROJECT IS NOT COMPLETE, still TODO:
 - No otimization done 
 - No code repetation handled
 - No tests written
-- Deploymet not done yet
 
 ## Table of contents
 
@@ -33,7 +32,7 @@ THIS PROJECT IS NOT COMPLETE, still TODO:
 
 ## Deployment
 
-TODO: Checkout the project from **[here]()**.
+Checkout the project from **[here](https://ts-react-brewery-app.pages.dev/)**.
 
 ## Getting started
 
