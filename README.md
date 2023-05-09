@@ -3,7 +3,7 @@
 Assigment to create fetch, display, and search for brewery companies from the given API endpoint, using React and TypeScript
 
 THIS PROJECT IS NOT COMPLETE, still TODO:
-- Not all the addigment requirements are met
+- Not all the assignment requirements are met
 - No prober folder structure applied
 - No proper styling applied
 - No otimization done 
